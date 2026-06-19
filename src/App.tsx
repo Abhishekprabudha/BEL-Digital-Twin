@@ -9,6 +9,7 @@ import DigitalThread from './pages/DigitalThread';
 import SolverIntegration from './pages/SolverIntegration';
 import DeploymentBlueprint from './pages/DeploymentBlueprint';
 import DemoStoryMode from './pages/DemoStoryMode';
+import EoiCompliance from './pages/EoiCompliance';
 
 const pages: Record<PageKey, ReactNode> = {
   command: <CommandCenter />,
@@ -19,6 +20,7 @@ const pages: Record<PageKey, ReactNode> = {
   thread: <DigitalThread />,
   solver: <SolverIntegration />,
   deployment: <DeploymentBlueprint />,
+  compliance: <EoiCompliance />,
   story: <DemoStoryMode />
 };
 

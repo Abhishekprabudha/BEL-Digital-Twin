@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import StatusBadge from './StatusBadge';
 
-export type PageKey = 'command' | 'twin' | 'workbench' | 'scenario' | 'predictive' | 'thread' | 'solver' | 'deployment' | 'story';
+export type PageKey = 'command' | 'twin' | 'workbench' | 'scenario' | 'predictive' | 'thread' | 'solver' | 'deployment' | 'compliance' | 'story';
 
 interface ShellProps {
   active: PageKey;
@@ -18,7 +18,8 @@ const navItems: Array<{ key: PageKey; label: string; short: string }> = [
   { key: 'thread', label: 'Digital Thread & Traceability', short: '06' },
   { key: 'solver', label: 'Solver & API Integration', short: '07' },
   { key: 'deployment', label: 'On-Prem Deployment Blueprint', short: '08' },
-  { key: 'story', label: 'Demo Story Mode', short: '09' }
+  { key: 'compliance', label: 'EOI Compliance Matrix', short: '09' },
+  { key: 'story', label: 'Demo Story Mode', short: '10' }
 ];
 
 export default function Shell({ active, onNavigate, children }: ShellProps) {
