@@ -6,6 +6,12 @@ import StatusBadge from '../components/StatusBadge';
 
 const pipeline = ['Data Ingestion', 'Pre-processing', 'Solver Orchestration', 'ROM Generation', 'Visualization', 'Analytics', 'Decision Recommendation', 'Digital Thread Update'];
 
+const benchmarkPanels = [
+  { stage: 'Solver scaling', workload: 'Thermal + RF coupled solve', baseline: '1× CPU node', accelerated: '5.8× on 4× GPU partition', evidence: 'Queue telemetry, solver logs and residual convergence history' },
+  { stage: 'Pre-processing scaling', workload: 'Geometry cleanup + 42M-cell mesh', baseline: '74 min workstation', accelerated: '18 min HPC batch', evidence: 'Mesh quality histogram, partition balance and input checksum' },
+  { stage: 'Post-processing scaling', workload: 'Volumetric field extraction + report pack', baseline: '31 min local', accelerated: '7 min distributed workers', evidence: 'Derived KPI provenance, image tile manifest and report hash' }
+];
+
 export default function SolverIntegration() {
   return (
     <div>
@@ -22,6 +28,22 @@ export default function SolverIntegration() {
           </div>
         </div>
       </GlassCard>
+      <GlassCard title="GPU/HPC benchmark panels" kicker="Solver, pre-processing and post-processing scalability" className="mt-4" action={<StatusBadge tone="green">HPC ready</StatusBadge>}>
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+          {benchmarkPanels.map((panel) => (
+            <div key={panel.stage} className="rounded-2xl border border-belgreen/20 bg-belgreen/10 p-4">
+              <div className="text-xs uppercase tracking-[0.22em] text-belgreen">{panel.stage}</div>
+              <div className="mt-2 font-bold text-white">{panel.workload}</div>
+              <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+                <div className="rounded-xl bg-slate-950/50 p-3"><div className="text-slate-500">Baseline</div><div className="font-semibold text-slate-100">{panel.baseline}</div></div>
+                <div className="rounded-xl bg-slate-950/50 p-3"><div className="text-slate-500">Accelerated</div><div className="font-semibold text-belgreen">{panel.accelerated}</div></div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-slate-300">{panel.evidence}</p>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
+
       <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_0.8fr]">
         <GlassCard title="Solver adapter catalog" kicker="Extensible integration layer">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
