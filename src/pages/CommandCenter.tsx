@@ -39,7 +39,7 @@ export default function CommandCenter() {
       <div className="mt-4 grid grid-cols-1 gap-4 2xl:grid-cols-[1.15fr_0.85fr]">
         <GlassCard title={asset.name} kicker="Interactive command visualization" action={<StatusBadge tone="cyan">Digital thread active</StatusBadge>}>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.3fr_0.7fr]">
-            <div className="min-h-[440px]"><DigitalTwin3D subsystems={subsystems} mode="health" compact /></div>
+            <div className="min-h-[440px]"><DigitalTwin3D subsystems={subsystems} mode="rf" compact geometry="rotating-dish" /></div>
             <div className="space-y-4">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <div className="mb-3 text-sm font-semibold text-slate-100">Live telemetry stream</div>
