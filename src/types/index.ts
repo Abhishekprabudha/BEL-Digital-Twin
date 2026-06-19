@@ -1,5 +1,25 @@
 export type RiskLevel = 'Low' | 'Medium' | 'High' | 'Critical' | 'Watch';
 
+export interface TelemetryBias {
+  thermal: number;
+  vibration: number;
+  rf: number;
+  eo: number;
+}
+
+export interface EquipmentAsset {
+  id: string;
+  name: string;
+  family: string;
+  classification: string;
+  missionProfile: string;
+  geometry: string;
+  health: number;
+  readiness: number;
+  telemetryBias: TelemetryBias;
+  description: string;
+}
+
 export interface Asset {
   id: string;
   name: string;

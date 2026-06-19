@@ -1,0 +1,86 @@
+[
+  {
+    "id": "aesa-mfr",
+    "name": "AESA Multi-Function Radar",
+    "family": "Radar",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional air-surveillance and tracking electronics demonstrator",
+    "geometry": "radar-panel",
+    "health": 92,
+    "readiness": 88,
+    "telemetryBias": { "thermal": 1.08, "vibration": 0.95, "rf": 1.04, "eo": 0.72 },
+    "description": "Active electronically scanned array concept with transmit/receive tile health, exciter stability, cooling reserve and synthetic RF-quality overlays."
+  },
+  {
+    "id": "coastal-surveillance-radar",
+    "name": "Coastal Surveillance Radar",
+    "family": "Radar",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional maritime surface-search and coastal-watch sensor",
+    "geometry": "rotating-dish",
+    "health": 89,
+    "readiness": 84,
+    "telemetryBias": { "thermal": 0.92, "vibration": 1.12, "rf": 0.98, "eo": 0.65 },
+    "description": "Rotating surveillance radar concept with pedestal vibration, receiver-noise margin, radome environmental load and uptime indicators."
+  },
+  {
+    "id": "weapon-locating-radar",
+    "name": "Weapon Locating Radar",
+    "family": "Radar",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional counter-battery trajectory-estimation electronics twin",
+    "geometry": "tilted-array",
+    "health": 87,
+    "readiness": 82,
+    "telemetryBias": { "thermal": 1.18, "vibration": 1.2, "rf": 0.94, "eo": 0.55 },
+    "description": "High-duty-cycle phased-array concept showing thermal soak, structural fatigue, RF aperture quality and reduced-envelope recommendations."
+  },
+  {
+    "id": "ew-suite",
+    "name": "Electronic Warfare Suite",
+    "family": "Electronic Warfare",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional ESM/ECM receiver, processor and countermeasure chain",
+    "geometry": "pod",
+    "health": 90,
+    "readiness": 86,
+    "telemetryBias": { "thermal": 1.02, "vibration": 0.9, "rf": 1.1, "eo": 0.5 },
+    "description": "Electronic-support and countermeasure concept with wideband receiver quality, processor load, power-amplifier stress and audit-ready recommendations."
+  },
+  {
+    "id": "iff-interrogator",
+    "name": "IFF Interrogator / Transponder",
+    "family": "Secure Communications",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional identification electronics with crypto-safe synthetic status only",
+    "geometry": "rack",
+    "health": 94,
+    "readiness": 91,
+    "telemetryBias": { "thermal": 0.84, "vibration": 0.82, "rf": 1.0, "eo": 0.45 },
+    "description": "Identification-friend-or-foe electronics concept using non-sensitive channel-health, timing, power and self-test indicators."
+  },
+  {
+    "id": "software-defined-radio",
+    "name": "Software Defined Radio Node",
+    "family": "Tactical Communications",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional multi-band communication node for networked operations",
+    "geometry": "rack",
+    "health": 93,
+    "readiness": 90,
+    "telemetryBias": { "thermal": 0.9, "vibration": 0.78, "rf": 1.06, "eo": 0.4 },
+    "description": "Modular radio concept with waveform processor load, PA health, timing stability and network-readiness telemetry."
+  },
+  {
+    "id": "eo-fire-control",
+    "name": "Electro-Optical Fire Control System",
+    "family": "Electro-Optics",
+    "classification": "Synthetic POC / Non-sensitive",
+    "missionProfile": "Fictional stabilized day/night sensor and tracker twin",
+    "geometry": "gimbal",
+    "health": 91,
+    "readiness": 87,
+    "telemetryBias": { "thermal": 0.88, "vibration": 1.05, "rf": 0.7, "eo": 1.12 },
+    "description": "EO/IR gimbal concept with lens clarity, stabilization error, detector temperature and synthetic atmospheric-load overlays."
+  }
+]

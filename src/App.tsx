@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import Shell, { type PageKey } from './components/Shell';
 import CommandCenter from './pages/CommandCenter';
 import DigitalTwinPage from './pages/DigitalTwinPage';
+import ElectronicsPortfolio from './pages/ElectronicsPortfolio';
 import MultiphysicsWorkbench from './pages/MultiphysicsWorkbench';
 import MissionScenarioEngine from './pages/MissionScenarioEngine';
 import PredictiveOperations from './pages/PredictiveOperations';
@@ -13,6 +14,7 @@ import EoiCompliance from './pages/EoiCompliance';
 
 const pages: Record<PageKey, ReactNode> = {
   command: <CommandCenter />,
+  portfolio: <ElectronicsPortfolio />,
   twin: <DigitalTwinPage />,
   workbench: <MultiphysicsWorkbench />,
   scenario: <MissionScenarioEngine />,

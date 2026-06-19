@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import StatusBadge from './StatusBadge';
 
-export type PageKey = 'command' | 'twin' | 'workbench' | 'scenario' | 'predictive' | 'thread' | 'solver' | 'deployment' | 'compliance' | 'story';
+export type PageKey = 'command' | 'portfolio' | 'twin' | 'workbench' | 'scenario' | 'predictive' | 'thread' | 'solver' | 'deployment' | 'compliance' | 'story';
 
 interface ShellProps {
   active: PageKey;
@@ -11,15 +11,16 @@ interface ShellProps {
 
 const navItems: Array<{ key: PageKey; label: string; short: string }> = [
   { key: 'command', label: 'Command Center', short: '01' },
-  { key: 'twin', label: '3D Digital Twin', short: '02' },
-  { key: 'workbench', label: 'Multiphysics Workbench', short: '03' },
-  { key: 'scenario', label: 'Mission Scenario Engine', short: '04' },
-  { key: 'predictive', label: 'Predictive Operations', short: '05' },
-  { key: 'thread', label: 'Digital Thread & Traceability', short: '06' },
-  { key: 'solver', label: 'Solver & API Integration', short: '07' },
-  { key: 'deployment', label: 'On-Prem Deployment Blueprint', short: '08' },
-  { key: 'compliance', label: 'EOI Compliance Matrix', short: '09' },
-  { key: 'story', label: 'Demo Story Mode', short: '10' }
+  { key: 'portfolio', label: 'Electronics Portfolio', short: '02' },
+  { key: 'twin', label: '3D Digital Twin', short: '03' },
+  { key: 'workbench', label: 'Multiphysics Workbench', short: '04' },
+  { key: 'scenario', label: 'Mission Scenario Engine', short: '05' },
+  { key: 'predictive', label: 'Predictive Operations', short: '06' },
+  { key: 'thread', label: 'Digital Thread & Traceability', short: '07' },
+  { key: 'solver', label: 'Solver & API Integration', short: '08' },
+  { key: 'deployment', label: 'On-Prem Deployment Blueprint', short: '09' },
+  { key: 'compliance', label: 'EOI Compliance Matrix', short: '10' },
+  { key: 'story', label: 'Demo Story Mode', short: '11' }
 ];
 
 export default function Shell({ active, onNavigate, children }: ShellProps) {
