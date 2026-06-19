@@ -29,17 +29,57 @@ function isRadarGeometry(geometry?: TwinGeometry | string) {
 }
 
 function RadarMeshSweep({ isDish }: { isDish: boolean }) {
-  const sweep = useRef<Mesh>(null);
+  const sweep = useRef<Group>(null);
 
   useFrame((_state, delta) => {
     if (sweep.current) sweep.current.rotation.z -= delta * 1.35;
   });
 
   return (
-    <mesh ref={sweep} position={[0, 0, isDish ? 0.5 : 0.17]} rotation={[0, 0, -0.35]}>
-      <circleGeometry args={[isDish ? 1.08 : 1.28, 48, 0, Math.PI / 3.1]} />
-      <meshStandardMaterial color="#2dd4ff" transparent opacity={0.22} emissive="#2dd4ff" emissiveIntensity={0.45} depthWrite={false} />
-    </mesh>
+    <group ref={sweep} position={[0, 0, isDish ? 0.5 : 0.17]} rotation={[0, 0, -0.35]}>
+      <mesh>
+        <circleGeometry args={[isDish ? 1.08 : 1.28, 56, 0, Math.PI / 3.1]} />
+        <meshStandardMaterial color="#2dd4ff" transparent opacity={0.28} emissive="#2dd4ff" emissiveIntensity={0.62} depthWrite={false} />
+      </mesh>
+      <mesh rotation={[0, 0, 0.22]}>
+        <circleGeometry args={[isDish ? 0.72 : 0.9, 48, 0, Math.PI / 4.2]} />
+        <meshStandardMaterial color="#4ade80" transparent opacity={0.18} emissive="#4ade80" emissiveIntensity={0.45} depthWrite={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function RadarSignalEffects({ isDish }: { isDish: boolean }) {
+  const group = useRef<Group>(null);
+  const ping = useRef<Mesh>(null);
+
+  useFrame(({ clock }, delta) => {
+    if (group.current) group.current.rotation.z += delta * 0.32;
+    if (ping.current) {
+      const scale = 1 + (Math.sin(clock.elapsedTime * 2.1) + 1) * 0.15;
+      ping.current.scale.setScalar(scale);
+    }
+  });
+
+  const z = isDish ? 0.54 : 0.19;
+
+  return (
+    <group ref={group} position={[0, 0, z]}>
+      {[0.42, 0.7, 0.98].map((radius, idx) => (
+        <mesh key={radius} position={[0, 0, idx * 0.012]}>
+          <torusGeometry args={[radius, 0.008, 12, 96]} />
+          <meshStandardMaterial color={idx === 1 ? '#4ade80' : '#2dd4ff'} emissive={idx === 1 ? '#4ade80' : '#2dd4ff'} emissiveIntensity={0.48} transparent opacity={0.56 - idx * 0.1} />
+        </mesh>
+      ))}
+      <mesh ref={ping} position={[0.44, 0.32, 0.08]}>
+        <sphereGeometry args={[0.055, 18, 12]} />
+        <meshStandardMaterial color="#f6b73c" emissive="#f6b73c" emissiveIntensity={0.9} transparent opacity={0.9} />
+      </mesh>
+      <mesh position={[-0.58, -0.2, 0.08]}>
+        <sphereGeometry args={[0.038, 16, 10]} />
+        <meshStandardMaterial color="#4ade80" emissive="#4ade80" emissiveIntensity={0.72} transparent opacity={0.82} />
+      </mesh>
+    </group>
   );
 }
 
@@ -63,6 +103,7 @@ function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
             <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.34} transparent opacity={0.42} wireframe />
           </mesh>
           <RadarMeshSweep isDish />
+          <RadarSignalEffects isDish />
           <mesh position={[0, 0, -0.08]} rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[1.05, 0.025, 16, 128]} />
             <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.35} />
@@ -101,6 +142,7 @@ function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
             </mesh>
           ))}
           <RadarMeshSweep isDish={false} />
+          <RadarSignalEffects isDish={false} />
           {Array.from({ length: 48 }).map((_, idx) => {
             const col = idx % 8;
             const row = Math.floor(idx / 8);
@@ -203,11 +245,15 @@ export default function DigitalTwin3D(props: DigitalTwin3DProps) {
     : { position: [3.8, 2.7, 4.4] as [number, number, number], fov: 44 };
 
   return (
-    <div className="h-full min-h-[320px] overflow-hidden rounded-2xl border border-belcyan/20 bg-[#050b15] shadow-glow">
+    <div className="relative h-full min-h-[320px] overflow-hidden rounded-2xl border border-belcyan/20 bg-[#050b15] shadow-glow">
+      {isRadarGeometry(props.geometry) && (
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_44%,rgba(45,212,255,0.22),transparent_34%),radial-gradient(circle_at_74%_22%,rgba(246,183,60,0.12),transparent_26%)]" />
+      )}
       <Canvas camera={camera}>
-        <ambientLight intensity={0.58} />
-        <pointLight position={[3, 5, 4]} intensity={1.6} color="#2dd4ff" />
-        <pointLight position={[-3, 2, -4]} intensity={1.1} color="#f6b73c" />
+        <ambientLight intensity={isRadarGeometry(props.geometry) ? 0.72 : 0.58} />
+        <pointLight position={[3, 5, 4]} intensity={isRadarGeometry(props.geometry) ? 2.1 : 1.6} color="#2dd4ff" />
+        <pointLight position={[-3, 2, -4]} intensity={isRadarGeometry(props.geometry) ? 1.35 : 1.1} color="#f6b73c" />
+        {isRadarGeometry(props.geometry) && <pointLight position={[0, 0, 3]} intensity={1.15} color="#4ade80" />}
         <Payload {...props} />
       </Canvas>
       <div className="pointer-events-none -mt-14 px-4 pb-4 text-xs text-slate-400">
