@@ -43,7 +43,7 @@ function Payload({ subsystems, selectedId, mode, onSelect, compact = false, show
   }, [geometry]);
 
   return (
-    <group ref={group} scale={showcase ? 1.32 : compact ? 0.95 : 1.08} position={showcase ? [0, 0.02, 0] : [0, 0, 0]}>
+    <group ref={group} scale={showcase ? 0.924 : compact ? 0.665 : 0.756} position={showcase ? [0, 0.02, 0] : [0, 0, 0]}>
       <mesh position={[0, 0, 0]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
         <boxGeometry args={geometry === 'rack' ? [2.1, 2.2, 1.15] : geometry === 'pod' ? [3.4, 0.95, 1.25] : [3.1, 1.28, 1.75]} />
         <meshStandardMaterial color="#152842" roughness={0.38} metalness={0.35} transparent opacity={0.92} />
