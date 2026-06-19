@@ -36,6 +36,14 @@ npm run build
 
 The production-ready static files will be generated in `dist/`.
 
+For GitHub Pages, use the included GitHub Actions workflow instead of publishing the repository root from Pages settings. The root `index.html` is a Vite development entry that imports `/src/main.tsx`; GitHub Pages must receive the compiled `dist/` artifact produced by `npm run build`.
+
+Recommended Pages setup:
+
+1. Open repository **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Push to `main`/`master` or manually run **Deploy website to GitHub Pages** from the Actions tab.
+
 ## How this evolves into a real BEL platform
 
 The POC is intentionally structured as a clean React + Vite + TypeScript application with JSON datasets and TypeScript surrogate models. In production, the mock services can be replaced with secure on-premise microservices, solver adapters, telemetry connectors, PLM/ALM integrations, audit services and HPC/GPU job queues.
