@@ -33,7 +33,7 @@ export default function ElectronicsPortfolio() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 2xl:grid-cols-[0.9fr_1.1fr]">
         <GlassCard title="Featured animated twin" kicker={featured.name} action={<StatusBadge tone="green">Same 3D animation</StatusBadge>}>
-          <div className="min-h-[440px]"><DigitalTwin3D subsystems={subsystems} mode="rf" compact geometry={featured.geometry} /></div>
+          <div className="h-[480px]"><DigitalTwin3D subsystems={subsystems} mode="rf" showcase geometry={featured.geometry} /></div>
         </GlassCard>
         <GlassCard title="Portfolio synthetic data model" kicker="Non-sensitive demonstrator dataset">
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">

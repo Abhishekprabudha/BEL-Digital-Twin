@@ -12,6 +12,7 @@ interface DigitalTwin3DProps {
   mode: TwinMode;
   onSelect?: (subsystem: Subsystem) => void;
   compact?: boolean;
+  showcase?: boolean;
   geometry?: TwinGeometry | string;
 }
 
@@ -23,7 +24,7 @@ function colorForSubsystem(subsystem: Subsystem, mode: TwinMode) {
   return subsystem.health > 90 ? '#4ade80' : subsystem.health > 82 ? '#f6b73c' : '#fb7185';
 }
 
-function Payload({ subsystems, selectedId, mode, onSelect, compact = false, geometry = 'payload' }: DigitalTwin3DProps) {
+function Payload({ subsystems, selectedId, mode, onSelect, compact = false, showcase = false, geometry = 'payload' }: DigitalTwin3DProps) {
   const group = useRef<Group>(null);
   useFrame((_state, delta) => {
     if (group.current) group.current.rotation.y += delta * 0.13;
@@ -42,7 +43,7 @@ function Payload({ subsystems, selectedId, mode, onSelect, compact = false, geom
   }, [geometry]);
 
   return (
-    <group ref={group} scale={compact ? 0.95 : 1.08}>
+    <group ref={group} scale={showcase ? 1.32 : compact ? 0.95 : 1.08} position={showcase ? [0, 0.02, 0] : [0, 0, 0]}>
       <mesh position={[0, 0, 0]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
         <boxGeometry args={geometry === 'rack' ? [2.1, 2.2, 1.15] : geometry === 'pod' ? [3.4, 0.95, 1.25] : [3.1, 1.28, 1.75]} />
         <meshStandardMaterial color="#152842" roughness={0.38} metalness={0.35} transparent opacity={0.92} />
@@ -85,9 +86,13 @@ function Payload({ subsystems, selectedId, mode, onSelect, compact = false, geom
 }
 
 export default function DigitalTwin3D(props: DigitalTwin3DProps) {
+  const camera = props.showcase
+    ? { position: [2.8, 1.7, 4.2] as [number, number, number], fov: 34 }
+    : { position: [3.8, 2.7, 4.4] as [number, number, number], fov: 44 };
+
   return (
     <div className="h-full min-h-[320px] overflow-hidden rounded-2xl border border-belcyan/20 bg-[#050b15] shadow-glow">
-      <Canvas camera={{ position: [3.8, 2.7, 4.4], fov: 44 }}>
+      <Canvas camera={camera}>
         <ambientLight intensity={0.58} />
         <pointLight position={[3, 5, 4]} intensity={1.6} color="#2dd4ff" />
         <pointLight position={[-3, 2, -4]} intensity={1.1} color="#f6b73c" />
