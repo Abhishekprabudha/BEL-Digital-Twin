@@ -25,6 +25,12 @@ const formulas: Record<string, string> = {
 const chartKeys = ['Thermal risk', 'RF Performance', 'EO clarity', 'Mission Readiness'];
 const chartColors = ['#2dd4ff', '#f6b73c', '#4ade80', '#fb7185'];
 
+const surrogateValidationCards = [
+  { name: 'Thermal ROM', error: '±3.2% MAE', lineage: 'DOE sweep: ambient, power, cooling reserve', check: 'Energy balance preserved across reduced states' },
+  { name: 'RF surrogate', error: '±1.8 dB bound', lineage: 'Synthetic antenna cases linked to mesh and solver version', check: 'Monotonic thermal detuning and passivity checks' },
+  { name: 'Reliability ROM', error: '±4.5% life estimate', lineage: 'Mission cycles, junction temperature and load factors', check: 'Weibull trend and derating constraints maintained' }
+];
+
 export default function MultiphysicsWorkbench() {
   const [active, setActive] = useState(domains[1]);
   const [ambient, setAmbient] = useState(38);
@@ -72,6 +78,18 @@ export default function MultiphysicsWorkbench() {
       <div className="mb-4 flex flex-wrap gap-2">
         {domains.map((domain) => <button key={domain} onClick={() => setActive(domain)} className={`rounded-full border px-3 py-2 text-xs md:text-sm ${active === domain ? 'border-belcyan bg-belcyan/20 text-white' : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'}`}>{domain}</button>)}
       </div>
+      <GlassCard title="ROM / surrogate validation cards" kicker="Error bounds, training lineage and physics preservation" className="mb-4" action={<StatusBadge tone="green">Validation visible</StatusBadge>}>
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+          {surrogateValidationCards.map((card) => (
+            <div key={card.name} className="rounded-2xl border border-belgreen/20 bg-belgreen/10 p-4">
+              <div className="flex items-center justify-between gap-3"><div className="font-bold text-white">{card.name}</div><StatusBadge tone="green">{card.error}</StatusBadge></div>
+              <p className="mt-3 text-sm leading-6 text-slate-300"><span className="text-belcyan">Training lineage:</span> {card.lineage}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300"><span className="text-belamber">Physics check:</span> {card.check}</p>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
+
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-[0.9fr_1.1fr]">
         <GlassCard title={active} kicker="POC surrogate / ROM model" action={<StatusBadge tone="amber">Replaceable solver</StatusBadge>}>
           <div className="rounded-2xl border border-belcyan/20 bg-belcyan/8 p-4 text-sm leading-6 text-slate-300">

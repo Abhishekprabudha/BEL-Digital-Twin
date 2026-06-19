@@ -3,6 +3,15 @@ import GlassCard from '../components/GlassCard';
 import PageHeader from '../components/PageHeader';
 import StatusBadge from '../components/StatusBadge';
 
+const governanceArtifacts = [
+  ['RBAC', 'Role-to-permission matrix for admins, analysts, reviewers and operators.'],
+  ['Audit', 'Immutable event trails for solver runs, data imports, approvals and exports.'],
+  ['Secrets', 'Vault-backed rotation plan with no credentials stored in source or reports.'],
+  ['Data classification', 'Public, internal, restricted and export-controlled handling labels.'],
+  ['SBOM', 'Package inventory with license, provenance and handover evidence.'],
+  ['Vulnerability lifecycle', 'Triage, patch SLA, VAPT retest and exception sign-off workflow.']
+];
+
 export default function DeploymentBlueprint() {
   const data = blueprint as { layers: string[]; deploymentOptions: string[]; security: string[] };
   return (
@@ -26,6 +35,17 @@ export default function DeploymentBlueprint() {
           <div className="mt-5 rounded-3xl border border-belamber/25 bg-belamber/10 p-5 text-sm leading-6 text-slate-200"><strong className="text-belamber">IP handover posture:</strong> source code, dependency inventory, data, test-ready utilities, documentation, traceability artifacts and deployment instructions are structured for BEL ownership.</div>
         </GlassCard>
       </div>
+      <GlassCard title="Security governance artefacts" kicker="RBAC, audit, secrets, classification, SBOM and vulnerability lifecycle" className="mt-4" action={<StatusBadge tone="green">Governed</StatusBadge>}>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {governanceArtifacts.map(([title, body]) => (
+            <div key={title} className="rounded-2xl border border-belamber/20 bg-belamber/10 p-4">
+              <div className="font-semibold text-white">{title}</div>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{body}</p>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
+
       <GlassCard title="Security and assurance controls" kicker="Software SBU friendly" className="mt-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {data.security.map((control) => <div key={control} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"><div className="font-semibold text-white">{control}</div><p className="mt-2 text-sm leading-6 text-slate-400">Included as a POC-visible architecture control and production backlog item.</p></div>)}

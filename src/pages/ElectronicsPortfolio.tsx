@@ -15,6 +15,11 @@ export default function ElectronicsPortfolio() {
   const radarCount = equipment.filter((item) => item.family === 'Radar').length;
   const avgReadiness = Math.round(equipment.reduce((acc, item) => acc + item.readiness, 0) / equipment.length);
   const syntheticLoad = Math.round((point.powerLoad * featured.telemetryBias.thermal + point.syntheticInterferenceIndex * featured.telemetryBias.rf) / 2);
+  const chipAwareWorkflows = [
+    ['Semiconductor stress to platform', 'Junction temperature, duty cycle and derating margins update board-level reliability and payload availability.'],
+    ['Platform mission to chip stress', 'Mission thermal soak, vibration and RF load flow back into package fatigue and electromigration checks.'],
+    ['Bidirectional fidelity loop', 'Failure modes are traced from component lot, board, LRU and subsystem views into operational readiness.']
+  ];
 
   return (
     <div>
@@ -30,6 +35,18 @@ export default function ElectronicsPortfolio() {
         <MetricCard label="Portfolio readiness" value={avgReadiness} suffix="%" status="good" detail="Average synthetic readiness across electronics" />
         <MetricCard label="Live synthetic load" value={syntheticLoad} suffix="%" status={syntheticLoad > 70 ? 'watch' : 'good'} detail="Derived from power and interference telemetry" />
       </div>
+
+      <GlassCard title="Chip-aware reliability workflow" kicker="Semiconductor-to-platform fidelity" className="mt-4" action={<StatusBadge tone="green">Bidirectional</StatusBadge>}>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {chipAwareWorkflows.map(([title, body], index) => (
+            <div key={title} className="rounded-2xl border border-belcyan/20 bg-belcyan/8 p-4">
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-belcyan text-sm font-black text-slate-950">{index + 1}</div>
+              <div className="mt-3 font-bold text-white">{title}</div>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{body}</p>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
 
       <div className="mt-4 grid grid-cols-1 gap-4 2xl:grid-cols-[0.9fr_1.1fr]">
         <GlassCard title="Featured animated twin" kicker={featured.name} action={<StatusBadge tone="green">Same 3D animation</StatusBadge>}>
