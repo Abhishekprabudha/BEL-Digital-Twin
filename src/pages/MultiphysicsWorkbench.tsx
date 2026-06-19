@@ -3,7 +3,7 @@ import GlassCard from '../components/GlassCard';
 import PageHeader from '../components/PageHeader';
 import ProgressBar from '../components/ProgressBar';
 import StatusBadge from '../components/StatusBadge';
-import { DomainBars, SeriesChart } from '../components/Charts';
+import { DomainBars, MultiLineChart } from '../components/Charts';
 import { calculateEOClarity, calculateMissionReadiness, calculateReliabilityScore, calculateRFPerformance, calculateStructuralFatigue, calculateThermalRisk } from '../utils/simulation';
 
 const domains = [
@@ -21,6 +21,9 @@ const formulas: Record<string, string> = {
   'Embedded Control Logic': 'controlConfidence = transition coverage × assertion pass rate − anomaly penalty',
   'Functional Safety': 'safetyScore = validated controls + fallback state coverage − unresolved hazard penalty'
 };
+
+const chartKeys = ['Thermal risk', 'RF Performance', 'EO clarity', 'Mission Readiness'];
+const chartColors = ['#2dd4ff', '#f6b73c', '#4ade80', '#fb7185'];
 
 export default function MultiphysicsWorkbench() {
   const [active, setActive] = useState(domains[1]);
@@ -50,7 +53,17 @@ export default function MultiphysicsWorkbench() {
   const chartData = Array.from({ length: 10 }, (_, i) => {
     const step = i + 1;
     const nextThermal = calculateThermalRisk(ambient + i * 0.8, power + i * 1.3, cooling - i * 0.9, duration + i * 0.25);
-    return { step: `T+${step}`, risk: Math.round(nextThermal), readiness: Math.round(calculateMissionReadiness(89, calculateRFPerformance(95, nextThermal, 150, 32), calculateEOClarity(0.18, nextThermal, 30), nextThermal, reliability)) };
+    const nextRf = calculateRFPerformance(95, nextThermal, 150, 32);
+    const nextEo = calculateEOClarity(0.18, nextThermal, 30);
+    const nextReadiness = calculateMissionReadiness(89, nextRf, nextEo, nextThermal, reliability);
+
+    return {
+      step: `T+${step}`,
+      'Thermal risk': Math.round(nextThermal),
+      'RF Performance': Math.round(nextRf),
+      'EO clarity': Math.round(nextEo),
+      'Mission Readiness': Math.round(nextReadiness)
+    };
   });
 
   return (
@@ -89,8 +102,18 @@ export default function MultiphysicsWorkbench() {
               <DomainBars data={domainScores} />
             </div>
             <div className="rounded-2xl border border-white/10 bg-[#06101d] p-4">
-              <div className="mb-4 text-sm font-semibold text-slate-100">Thermal risk trend</div>
-              <SeriesChart data={chartData} xKey="step" yKey="risk" type="area" height={280} />
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="text-sm font-semibold text-slate-100">Multiphysics parameter trends</div>
+                <div className="flex flex-wrap gap-x-3 gap-y-2 text-[11px] text-slate-300">
+                  {chartKeys.map((key, index) => (
+                    <span key={key} className="inline-flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full" style={{ backgroundColor: chartColors[index] }} />
+                      {key}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <MultiLineChart data={chartData} xKey="step" keys={chartKeys} height={280} />
             </div>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
