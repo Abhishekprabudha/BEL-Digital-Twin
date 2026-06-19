@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import type { Group } from 'three';
+import type { Group, Mesh } from 'three';
 import type { Subsystem } from '../types';
 
 export type TwinMode = 'health' | 'heat' | 'stress' | 'rf' | 'eo';
@@ -28,10 +28,27 @@ function isRadarGeometry(geometry?: TwinGeometry | string) {
   return geometry === 'radar-panel' || geometry === 'rotating-dish' || geometry === 'tilted-array';
 }
 
+function RadarMeshSweep({ isDish }: { isDish: boolean }) {
+  const sweep = useRef<Mesh>(null);
+
+  useFrame((_state, delta) => {
+    if (sweep.current) sweep.current.rotation.z -= delta * 1.35;
+  });
+
+  return (
+    <mesh ref={sweep} position={[0, 0, isDish ? 0.5 : 0.17]} rotation={[0, 0, -0.35]}>
+      <circleGeometry args={[isDish ? 1.08 : 1.28, 48, 0, Math.PI / 3.1]} />
+      <meshStandardMaterial color="#2dd4ff" transparent opacity={0.22} emissive="#2dd4ff" emissiveIntensity={0.45} depthWrite={false} />
+    </mesh>
+  );
+}
+
 function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
   const isDish = geometry === 'rotating-dish';
   const isTilted = geometry === 'tilted-array';
   const surfaceRotation: [number, number, number] = isDish ? [0, 0, 0] : [isTilted ? -0.18 : 0, 0, 0];
+  const gridColumns = Array.from({ length: 11 }, (_, idx) => -1.25 + idx * 0.25);
+  const gridRows = Array.from({ length: 7 }, (_, idx) => -0.66 + idx * 0.22);
 
   return (
     <group position={[0, 0, 1.04]} rotation={surfaceRotation}>
@@ -39,8 +56,13 @@ function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
         <>
           <mesh position={[0, 0, 0.04]} rotation={[Math.PI / 2, 0, 0]}>
             <sphereGeometry args={[1.22, 64, 24, 0, Math.PI * 2, 0, Math.PI / 2.7]} />
-            <meshStandardMaterial color="#243f63" emissive="#0b5d7a" emissiveIntensity={0.18} roughness={0.28} metalness={0.42} transparent opacity={0.95} wireframe />
+            <meshStandardMaterial color="#243f63" emissive="#0b5d7a" emissiveIntensity={0.18} roughness={0.28} metalness={0.42} transparent opacity={0.86} />
           </mesh>
+          <mesh position={[0, 0, 0.09]} rotation={[Math.PI / 2, 0, 0]}>
+            <sphereGeometry args={[1.24, 64, 24, 0, Math.PI * 2, 0, Math.PI / 2.7]} />
+            <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.34} transparent opacity={0.42} wireframe />
+          </mesh>
+          <RadarMeshSweep isDish />
           <mesh position={[0, 0, -0.08]} rotation={[Math.PI / 2, 0, 0]}>
             <torusGeometry args={[1.05, 0.025, 16, 128]} />
             <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.35} />
@@ -58,10 +80,27 @@ function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
         </>
       ) : (
         <>
-          <mesh position={[0, 0, 0.04]}>
-            <boxGeometry args={[2.65, 1.42, 0.08, 18, 10, 1]} />
-            <meshStandardMaterial color="#243f63" emissive="#0b5d7a" emissiveIntensity={0.16} roughness={0.34} metalness={0.34} wireframe />
+          <mesh position={[0, 0, 0.02]}>
+            <boxGeometry args={[2.65, 1.42, 0.08]} />
+            <meshStandardMaterial color="#1b3554" emissive="#0b5d7a" emissiveIntensity={0.14} roughness={0.34} metalness={0.34} transparent opacity={0.9} />
           </mesh>
+          <mesh position={[0, 0, 0.085]}>
+            <boxGeometry args={[2.7, 1.46, 0.035, 24, 14, 1]} />
+            <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.36} transparent opacity={0.46} wireframe />
+          </mesh>
+          {gridColumns.map((x) => (
+            <mesh key={`grid-col-${x}`} position={[x, 0, 0.14]}>
+              <boxGeometry args={[0.012, 1.36, 0.018]} />
+              <meshStandardMaterial color="#2dd4ff" emissive="#2dd4ff" emissiveIntensity={0.28} transparent opacity={0.54} />
+            </mesh>
+          ))}
+          {gridRows.map((y) => (
+            <mesh key={`grid-row-${y}`} position={[0, y, 0.145]}>
+              <boxGeometry args={[2.52, 0.012, 0.018]} />
+              <meshStandardMaterial color="#2dd4ff" emissive="#2dd4ff" emissiveIntensity={0.28} transparent opacity={0.54} />
+            </mesh>
+          ))}
+          <RadarMeshSweep isDish={false} />
           {Array.from({ length: 48 }).map((_, idx) => {
             const col = idx % 8;
             const row = Math.floor(idx / 8);
