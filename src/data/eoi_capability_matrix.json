@@ -1,0 +1,100 @@
+[
+  {
+    "clause": "1",
+    "title": "Deep-tech ownership",
+    "evidence": "In-house physics modelling, systems engineering, solver adapters, synthetic validation packs and audit-ready source handover artefacts.",
+    "showcase": ["Architecture source map", "Technical ownership register", "Solver competency catalogue"],
+    "maturity": 92
+  },
+  {
+    "clause": "2",
+    "title": "Modular indigenous platform",
+    "evidence": "Lifecycle twin framework combining engineering simulations, telemetry, analytics, 3D visualization and deployment blueprints for on-prem, cloud or hybrid operations.",
+    "showcase": ["Layered platform blueprint", "Source-code handover checklist", "Extensible microservice contracts"],
+    "maturity": 94
+  },
+  {
+    "clause": "3",
+    "title": "Deeptech domain breadth",
+    "evidence": "Structural, CFD, HF/LF EM, optics, photonics, systems engineering, functional safety and model-based embedded code are represented as first-class traceable domains.",
+    "showcase": ["Domain coverage heatmap", "Model library index", "IV&V evidence links"],
+    "maturity": 89
+  },
+  {
+    "clause": "4",
+    "title": "Automation, customization and security",
+    "evidence": "Role-aware APIs, secure architecture controls, data-protection hooks, vulnerability lifecycle and customizable operator workflows.",
+    "showcase": ["Security control plane", "Workflow builder", "Vulnerability dashboard"],
+    "maturity": 86
+  },
+  {
+    "clause": "5",
+    "title": "GPU-scalable solver workflows",
+    "evidence": "Parallel solver execution is extended to mesh preparation, parametric sweeps, reduced-order generation and post-processing on HPC/GPU queues.",
+    "showcase": ["GPU job scheduler", "Pre/post pipeline telemetry", "Scaling benchmark view"],
+    "maturity": 84
+  },
+  {
+    "clause": "6",
+    "title": "Predictive maintenance and operations",
+    "evidence": "Physics-preserving projection ROMs and validated surrogates feed remaining-useful-life, anomaly and mission-readiness predictions.",
+    "showcase": ["ROM validation cards", "Predictive operations cockpit", "Surrogate confidence bands"],
+    "maturity": 91
+  },
+  {
+    "clause": "7",
+    "title": "Chip-aware system analysis",
+    "evidence": "Bidirectional exchange between semiconductor, board, thermal, RF and platform-level simulations with traceable fidelity assumptions.",
+    "showcase": ["Chip-to-system bridge", "Package reliability workflow", "System-aware chip KPIs"],
+    "maturity": 78
+  },
+  {
+    "clause": "8",
+    "title": "Electronics reliability",
+    "evidence": "Multiphysics reliability qualification covers thermal cycling, vibration exposure, derating, power transients and component RUL.",
+    "showcase": ["Reliability qualification pack", "Derating matrix", "Failure-physics chain"],
+    "maturity": 88
+  },
+  {
+    "clause": "9",
+    "title": "Mechanical-optical coupling",
+    "evidence": "Aero-thermal-structural loads are coupled into optical pointing, line-of-sight, clarity and photonics performance envelopes.",
+    "showcase": ["Aero-optical workflow", "Vibration-to-LOS model", "Optics qualification study"],
+    "maturity": 82
+  },
+  {
+    "clause": "10",
+    "title": "Mission-level EW dynamics",
+    "evidence": "Time-dynamic scenario engine supports synthetic tri-service mission trade studies, sensor behaviour and operational intelligence assessment without sensitive tactics.",
+    "showcase": ["Mission timeline simulator", "Trade-space explorer", "EW scenario evidence pack"],
+    "maturity": 87
+  },
+  {
+    "clause": "11",
+    "title": "Native scenario computation engine",
+    "evidence": "Scenario calculations interoperate with multiphysics solvers for EM, optics, photonics, fluids and structures to preserve first-principles consistency.",
+    "showcase": ["Scenario-solver handshake", "Physics-consistency checks", "Environment response models"],
+    "maturity": 85
+  },
+  {
+    "clause": "12",
+    "title": "Data, microservices, 3D and HPC",
+    "evidence": "Heterogeneous data orchestration, containerized pipelines, advanced 3D context and on-prem HPC deployment are visible as modular platform layers.",
+    "showcase": ["Data orchestration map", "Microservice DAG", "On-prem HPC topology"],
+    "maturity": 93
+  },
+  {
+    "clause": "13",
+    "title": "Open APIs and solver front end",
+    "evidence": "REST-facing adapters integrate open-source and third-party solvers while exposing a unified GUI for operators and analysts.",
+    "showcase": ["API catalogue", "Adapter certification", "Unified solver launchpad"],
+    "maturity": 90
+  },
+  {
+    "clause": "14",
+    "title": "Layered service-oriented architecture",
+    "evidence": "Data ingestion, knowledge representation, simulation orchestration, integration, analytics and decision layers are separated for scalability and fault tolerance.",
+    "showcase": ["Layer-by-layer compliance", "Fault-tolerance drills", "Horizontal scale controls"],
+    "maturity": 95
+  }
+]
