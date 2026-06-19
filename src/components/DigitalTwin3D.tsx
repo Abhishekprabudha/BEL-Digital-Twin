@@ -4,6 +4,7 @@ import type { Group } from 'three';
 import type { Subsystem } from '../types';
 
 export type TwinMode = 'health' | 'heat' | 'stress' | 'rf' | 'eo';
+export type TwinGeometry = 'payload' | 'radar-panel' | 'rotating-dish' | 'tilted-array' | 'pod' | 'rack' | 'gimbal';
 
 interface DigitalTwin3DProps {
   subsystems: Subsystem[];
@@ -11,6 +12,7 @@ interface DigitalTwin3DProps {
   mode: TwinMode;
   onSelect?: (subsystem: Subsystem) => void;
   compact?: boolean;
+  geometry?: TwinGeometry | string;
 }
 
 function colorForSubsystem(subsystem: Subsystem, mode: TwinMode) {
@@ -21,30 +23,36 @@ function colorForSubsystem(subsystem: Subsystem, mode: TwinMode) {
   return subsystem.health > 90 ? '#4ade80' : subsystem.health > 82 ? '#f6b73c' : '#fb7185';
 }
 
-function Payload({ subsystems, selectedId, mode, onSelect, compact = false }: DigitalTwin3DProps) {
+function Payload({ subsystems, selectedId, mode, onSelect, compact = false, geometry = 'payload' }: DigitalTwin3DProps) {
   const group = useRef<Group>(null);
   useFrame((_state, delta) => {
     if (group.current) group.current.rotation.y += delta * 0.13;
   });
 
-  const positions = useMemo(() => [
-    [-1.6, 0.35, 0.82], [1.55, 0.30, 0.72], [0, 0.62, 1.12],
-    [-0.82, -0.58, 0.85], [0.78, -0.58, 0.85], [-1.65, -0.45, -0.2],
-    [1.6, -0.45, -0.2], [-0.68, 0.22, -1.05], [0.68, 0.22, -1.05], [0, -0.75, -0.65]
-  ] as [number, number, number][], []);
+  const positions = useMemo(() => {
+    const base: [number, number, number][] = [
+      [-1.6, 0.35, 0.82], [1.55, 0.30, 0.72], [0, 0.62, 1.12],
+      [-0.82, -0.58, 0.85], [0.78, -0.58, 0.85], [-1.65, -0.45, -0.2],
+      [1.6, -0.45, -0.2], [-0.68, 0.22, -1.05], [0.68, 0.22, -1.05], [0, -0.75, -0.65]
+    ];
+    if (geometry === 'rack') return base.map(([x, _y, z], idx) => [x * 0.68, 0.62 - idx * 0.34, z * 0.45] as [number, number, number]);
+    if (geometry === 'gimbal') return base.map(([x, y, z]) => [x * 0.72, y * 0.9, z * 0.72] as [number, number, number]);
+    if (geometry === 'rotating-dish' || geometry === 'tilted-array') return base.map(([x, y, z]) => [x * 0.82, y * 0.8, z * 0.88] as [number, number, number]);
+    return base;
+  }, [geometry]);
 
   return (
     <group ref={group} scale={compact ? 0.95 : 1.08}>
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[3.1, 1.28, 1.75]} />
+      <mesh position={[0, 0, 0]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
+        <boxGeometry args={geometry === 'rack' ? [2.1, 2.2, 1.15] : geometry === 'pod' ? [3.4, 0.95, 1.25] : [3.1, 1.28, 1.75]} />
         <meshStandardMaterial color="#152842" roughness={0.38} metalness={0.35} transparent opacity={0.92} />
       </mesh>
-      <mesh position={[0, 0, 1.03]}>
-        <boxGeometry args={[2.25, 0.9, 0.12]} />
+      <mesh position={[0, 0, geometry === 'rack' ? 0.7 : 1.03]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
+        <boxGeometry args={geometry === 'rotating-dish' ? [2.55, 0.18, 1.35] : geometry === 'gimbal' ? [1.45, 0.9, 0.14] : [2.25, 0.9, 0.12]} />
         <meshStandardMaterial color="#203a5f" emissive="#0b5d7a" emissiveIntensity={0.18} />
       </mesh>
       <mesh position={[0, 0.78, 0.05]}>
-        <sphereGeometry args={[0.42, 32, 16]} />
+        <sphereGeometry args={geometry === 'gimbal' ? [0.58, 32, 16] : [0.42, 32, 16]} />
         <meshStandardMaterial color="#1dd3ff" roughness={0.2} metalness={0.15} transparent opacity={0.68} />
       </mesh>
       <mesh position={[0, -0.98, 0]}>
@@ -86,7 +94,7 @@ export default function DigitalTwin3D(props: DigitalTwin3DProps) {
         <Payload {...props} />
       </Canvas>
       <div className="pointer-events-none -mt-14 px-4 pb-4 text-xs text-slate-400">
-        <span className="rounded-full border border-belcyan/20 bg-belcyan/10 px-3 py-1">Interactive synthetic 3D twin · mode: {props.mode}</span>
+        <span className="rounded-full border border-belcyan/20 bg-belcyan/10 px-3 py-1">Interactive synthetic 3D twin · mode: {props.mode} · geometry: {props.geometry ?? 'payload'}</span>
       </div>
     </div>
   );
