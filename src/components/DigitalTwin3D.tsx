@@ -24,6 +24,75 @@ function colorForSubsystem(subsystem: Subsystem, mode: TwinMode) {
   return subsystem.health > 90 ? '#4ade80' : subsystem.health > 82 ? '#f6b73c' : '#fb7185';
 }
 
+function isRadarGeometry(geometry?: TwinGeometry | string) {
+  return geometry === 'radar-panel' || geometry === 'rotating-dish' || geometry === 'tilted-array';
+}
+
+function RadarSurfaceMesh({ geometry }: { geometry?: TwinGeometry | string }) {
+  const isDish = geometry === 'rotating-dish';
+  const isTilted = geometry === 'tilted-array';
+  const surfaceRotation: [number, number, number] = isDish ? [0, 0, 0] : [isTilted ? -0.18 : 0, 0, 0];
+
+  return (
+    <group position={[0, 0, 1.04]} rotation={surfaceRotation}>
+      {isDish ? (
+        <>
+          <mesh position={[0, 0, 0.04]} rotation={[Math.PI / 2, 0, 0]}>
+            <sphereGeometry args={[1.22, 64, 24, 0, Math.PI * 2, 0, Math.PI / 2.7]} />
+            <meshStandardMaterial color="#243f63" emissive="#0b5d7a" emissiveIntensity={0.18} roughness={0.28} metalness={0.42} transparent opacity={0.95} wireframe />
+          </mesh>
+          <mesh position={[0, 0, -0.08]} rotation={[Math.PI / 2, 0, 0]}>
+            <torusGeometry args={[1.05, 0.025, 16, 128]} />
+            <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.35} />
+          </mesh>
+          <mesh position={[0, 0, 0.48]}>
+            <sphereGeometry args={[0.16, 24, 16]} />
+            <meshStandardMaterial color="#f6b73c" emissive="#f6b73c" emissiveIntensity={0.25} metalness={0.25} />
+          </mesh>
+          {[0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2].map((angle) => (
+            <mesh key={angle} position={[Math.cos(angle) * 0.52, Math.sin(angle) * 0.52, 0.16]} rotation={[Math.PI / 2, 0, angle]}>
+              <boxGeometry args={[0.72, 0.025, 0.025]} />
+              <meshStandardMaterial color="#8fb8d8" emissive="#2dd4ff" emissiveIntensity={0.14} />
+            </mesh>
+          ))}
+        </>
+      ) : (
+        <>
+          <mesh position={[0, 0, 0.04]}>
+            <boxGeometry args={[2.65, 1.42, 0.08, 18, 10, 1]} />
+            <meshStandardMaterial color="#243f63" emissive="#0b5d7a" emissiveIntensity={0.16} roughness={0.34} metalness={0.34} wireframe />
+          </mesh>
+          {Array.from({ length: 48 }).map((_, idx) => {
+            const col = idx % 8;
+            const row = Math.floor(idx / 8);
+            const active = (idx + row) % 3 === 0;
+            return (
+              <mesh key={idx} position={[-1.14 + col * 0.325, -0.52 + row * 0.205, 0.11]}>
+                <boxGeometry args={[0.19, 0.105, 0.035]} />
+                <meshStandardMaterial color={active ? '#2dd4ff' : '#8fb8d8'} emissive={active ? '#2dd4ff' : '#0b5d7a'} emissiveIntensity={active ? 0.34 : 0.12} roughness={0.3} metalness={0.3} />
+              </mesh>
+            );
+          })}
+          {[-0.72, 0, 0.72].map((x) => (
+            <mesh key={x} position={[x, 0.76, 0]}>
+              <cylinderGeometry args={[0.035, 0.035, 1.5, 16]} />
+              <meshStandardMaterial color="#7dd3fc" emissive="#2dd4ff" emissiveIntensity={0.25} />
+            </mesh>
+          ))}
+          <mesh position={[0, -0.86, -0.03]}>
+            <boxGeometry args={[2.85, 0.18, 0.16]} />
+            <meshStandardMaterial color="#172554" roughness={0.42} metalness={0.42} />
+          </mesh>
+        </>
+      )}
+      <mesh position={[0, -0.95, -0.18]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.16, 0.22, 0.72, 24]} />
+        <meshStandardMaterial color="#0f172a" roughness={0.55} metalness={0.35} />
+      </mesh>
+    </group>
+  );
+}
+
 function Payload({ subsystems, selectedId, mode, onSelect, compact = false, showcase = false, geometry = 'payload' }: DigitalTwin3DProps) {
   const group = useRef<Group>(null);
   useFrame((_state, delta) => {
@@ -38,20 +107,24 @@ function Payload({ subsystems, selectedId, mode, onSelect, compact = false, show
     ];
     if (geometry === 'rack') return base.map(([x, _y, z], idx) => [x * 0.68, 0.62 - idx * 0.34, z * 0.45] as [number, number, number]);
     if (geometry === 'gimbal') return base.map(([x, y, z]) => [x * 0.72, y * 0.9, z * 0.72] as [number, number, number]);
-    if (geometry === 'rotating-dish' || geometry === 'tilted-array') return base.map(([x, y, z]) => [x * 0.82, y * 0.8, z * 0.88] as [number, number, number]);
+    if (isRadarGeometry(geometry)) return base.map(([x, y, z], idx) => [x * 0.74, y * 0.78 - (idx > 4 ? 0.16 : 0), z * 0.7] as [number, number, number]);
     return base;
   }, [geometry]);
 
   return (
     <group ref={group} scale={showcase ? 1.32 : compact ? 0.95 : 1.08} position={showcase ? [0, 0.02, 0] : [0, 0, 0]}>
       <mesh position={[0, 0, 0]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
-        <boxGeometry args={geometry === 'rack' ? [2.1, 2.2, 1.15] : geometry === 'pod' ? [3.4, 0.95, 1.25] : [3.1, 1.28, 1.75]} />
+        <boxGeometry args={geometry === 'rack' ? [2.1, 2.2, 1.15] : geometry === 'pod' ? [3.4, 0.95, 1.25] : isRadarGeometry(geometry) ? [3.0, 1.15, 1.45] : [3.1, 1.28, 1.75]} />
         <meshStandardMaterial color="#152842" roughness={0.38} metalness={0.35} transparent opacity={0.92} />
       </mesh>
-      <mesh position={[0, 0, geometry === 'rack' ? 0.7 : 1.03]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
-        <boxGeometry args={geometry === 'rotating-dish' ? [2.55, 0.18, 1.35] : geometry === 'gimbal' ? [1.45, 0.9, 0.14] : [2.25, 0.9, 0.12]} />
-        <meshStandardMaterial color="#203a5f" emissive="#0b5d7a" emissiveIntensity={0.18} />
-      </mesh>
+      {isRadarGeometry(geometry) ? (
+        <RadarSurfaceMesh geometry={geometry} />
+      ) : (
+        <mesh position={[0, 0, geometry === 'rack' ? 0.7 : 1.03]} rotation={geometry === 'tilted-array' ? [0, 0, -0.22] : [0, 0, 0]}>
+          <boxGeometry args={geometry === 'gimbal' ? [1.45, 0.9, 0.14] : [2.25, 0.9, 0.12]} />
+          <meshStandardMaterial color="#203a5f" emissive="#0b5d7a" emissiveIntensity={0.18} />
+        </mesh>
+      )}
       <mesh position={[0, 0.78, 0.05]}>
         <sphereGeometry args={geometry === 'gimbal' ? [0.58, 32, 16] : [0.42, 32, 16]} />
         <meshStandardMaterial color="#1dd3ff" roughness={0.2} metalness={0.15} transparent opacity={0.68} />
@@ -99,7 +172,7 @@ export default function DigitalTwin3D(props: DigitalTwin3DProps) {
         <Payload {...props} />
       </Canvas>
       <div className="pointer-events-none -mt-14 px-4 pb-4 text-xs text-slate-400">
-        <span className="rounded-full border border-belcyan/20 bg-belcyan/10 px-3 py-1">Interactive synthetic 3D twin · mode: {props.mode} · geometry: {props.geometry ?? 'payload'}</span>
+        <span className="rounded-full border border-belcyan/20 bg-belcyan/10 px-3 py-1">Interactive synthetic 3D twin · component mesh + surface detail · mode: {props.mode} · geometry: {props.geometry ?? 'payload'}</span>
       </div>
     </div>
   );
