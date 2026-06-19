@@ -1,0 +1,102 @@
+[
+  {
+    "componentId": "RAD-01",
+    "component": "AESA Radar Module",
+    "rulHours": 820,
+    "failureProbability": 4.8,
+    "trend": "Stable",
+    "anomalyScore": 18.2,
+    "action": "Monitor thermal drift during high-power synthetic profile.",
+    "missionImpact": "Low"
+  },
+  {
+    "componentId": "ESM-02",
+    "component": "Electronic Support Measures Module",
+    "rulHours": 740,
+    "failureProbability": 6.1,
+    "trend": "Stable",
+    "anomalyScore": 23.2,
+    "action": "Run calibration check after dense synthetic environment scenario.",
+    "missionImpact": "Medium"
+  },
+  {
+    "componentId": "EO-03",
+    "component": "Electro-Optical Sensor Module",
+    "rulHours": 910,
+    "failureProbability": 3.4,
+    "trend": "Stable",
+    "anomalyScore": 12.9,
+    "action": "Maintain alignment inspection at next synthetic maintenance window.",
+    "missionImpact": "Low"
+  },
+  {
+    "componentId": "RFP-04",
+    "component": "RF Power Amplifier Module",
+    "rulHours": 420,
+    "failureProbability": 14.2,
+    "trend": "Rising",
+    "anomalyScore": 54.0,
+    "action": "Inspect within 42 synthetic operating hours under reduced envelope.",
+    "missionImpact": "High"
+  },
+  {
+    "componentId": "CLG-05",
+    "component": "Cooling and Thermal Control Unit",
+    "rulHours": 560,
+    "failureProbability": 10.1,
+    "trend": "Rising",
+    "anomalyScore": 38.4,
+    "action": "Check fan anomaly trend and airflow efficiency.",
+    "missionImpact": "Medium"
+  },
+  {
+    "componentId": "STR-06",
+    "component": "Structural Mount and Vibration Assembly",
+    "rulHours": 690,
+    "failureProbability": 7.5,
+    "trend": "Stable",
+    "anomalyScore": 28.5,
+    "action": "Run fatigue simulation for high-vibration profile.",
+    "missionImpact": "Medium"
+  },
+  {
+    "componentId": "ECC-07",
+    "component": "Embedded Control Computer",
+    "rulHours": 880,
+    "failureProbability": 4.0,
+    "trend": "Stable",
+    "anomalyScore": 15.2,
+    "action": "Model-based code assertions nominal.",
+    "missionImpact": "Low"
+  },
+  {
+    "componentId": "PDU-08",
+    "component": "Power Distribution Unit",
+    "rulHours": 610,
+    "failureProbability": 8.4,
+    "trend": "Rising",
+    "anomalyScore": 31.9,
+    "action": "Monitor load transients during scenario run.",
+    "missionImpact": "Medium"
+  },
+  {
+    "componentId": "MSP-09",
+    "component": "Mission Scenario Processor",
+    "rulHours": 850,
+    "failureProbability": 3.9,
+    "trend": "Stable",
+    "anomalyScore": 14.8,
+    "action": "Scenario event engine healthy.",
+    "missionImpact": "Low"
+  },
+  {
+    "componentId": "HMU-10",
+    "component": "Health Monitoring Unit",
+    "rulHours": 960,
+    "failureProbability": 2.4,
+    "trend": "Stable",
+    "anomalyScore": 9.1,
+    "action": "Continue telemetry fusion and audit logging.",
+    "missionImpact": "Low"
+  }
+]

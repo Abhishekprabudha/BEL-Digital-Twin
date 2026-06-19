@@ -1,0 +1,12 @@
+{
+  "id": "STRUCT-002",
+  "domain": "Structural Mechanics",
+  "inputs": [
+    "vibration",
+    "missionDuration",
+    "loadFactor"
+  ],
+  "formula": "fatigue = f(vibration, duration, loadFactor) synthetic ROM",
+  "validation": "POC surrogate model only",
+  "visual": "stress-gradient-map"
+}

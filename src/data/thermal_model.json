@@ -1,0 +1,13 @@
+{
+  "id": "THERM-001",
+  "domain": "Thermal Simulation",
+  "inputs": [
+    "ambientTemp",
+    "powerLoad",
+    "coolingEfficiency",
+    "duration"
+  ],
+  "formula": "thermalRisk = weighted ambient + load - cooling reserve",
+  "validation": "POC surrogate model only",
+  "visual": "thermal-heatmap"
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "BEL-DT-EWREO-001",
+    "name": "Integrated EW-Radar-EO Payload Digital Twin",
+    "classification": "Synthetic POC / Non-sensitive",
+    "owner": "BEL Source-Owned Demonstrator",
+    "missionProfile": "Fictional electronics payload for multiphysics digital twin validation",
+    "health": 92,
+    "readiness": 88,
+    "digitalThread": "Concept-to-support chain active",
+    "deployment": "On-premise / air-gapped ready concept"
+  }
+]

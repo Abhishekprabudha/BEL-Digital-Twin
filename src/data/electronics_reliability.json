@@ -1,0 +1,12 @@
+{
+  "id": "REL-004",
+  "domain": "Electronics Reliability",
+  "inputs": [
+    "temperature",
+    "cycles",
+    "loadFactor"
+  ],
+  "formula": "synthetic Weibull-inspired reliability decay",
+  "validation": "POC surrogate model only",
+  "visual": "reliability-curve"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "time": "09:00",
+    "actor": "System",
+    "event": "Synthetic telemetry stream initialized",
+    "evidence": "AUD-001"
+  },
+  {
+    "time": "09:02",
+    "actor": "Engineer",
+    "event": "Thermal ROM simulation run completed",
+    "evidence": "AUD-002"
+  },
+  {
+    "time": "09:03",
+    "actor": "Operator",
+    "event": "Dense electromagnetic scenario selected",
+    "evidence": "AUD-003"
+  },
+  {
+    "time": "09:05",
+    "actor": "IV&V Reviewer",
+    "event": "Traceability package generated",
+    "evidence": "AUD-004"
+  }
+]

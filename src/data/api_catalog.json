@@ -1,0 +1,32 @@
+[
+  {
+    "method": "POST",
+    "endpoint": "/api/simulation/run",
+    "purpose": "Submit solver or ROM job"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/twin/{id}/health",
+    "purpose": "Fetch digital twin health state"
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/telemetry/ingest",
+    "purpose": "Ingest synthetic telemetry event"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/traceability/report",
+    "purpose": "Generate traceability package"
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/solver/job",
+    "purpose": "Submit HPC/GPU job"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/scenario/{id}/result",
+    "purpose": "Fetch scenario outcome"
+  }
+]

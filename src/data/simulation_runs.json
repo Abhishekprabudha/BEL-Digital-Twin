@@ -1,0 +1,38 @@
+[
+  {
+    "id": "SIM-1001",
+    "domain": "Thermal Simulation",
+    "status": "Completed",
+    "duration": "00:38",
+    "risk": "Medium",
+    "result": 71,
+    "linkedRequirement": "REQ-THERM-001"
+  },
+  {
+    "id": "SIM-1002",
+    "domain": "Structural Mechanics",
+    "status": "Running",
+    "duration": "00:14",
+    "risk": "Low",
+    "result": 86,
+    "linkedRequirement": "REQ-STR-005"
+  },
+  {
+    "id": "SIM-1003",
+    "domain": "High-Frequency Electromagnetics",
+    "status": "Queued",
+    "duration": "--",
+    "risk": "Watch",
+    "result": 79,
+    "linkedRequirement": "REQ-RF-001"
+  },
+  {
+    "id": "SIM-1004",
+    "domain": "Optics / Photonics",
+    "status": "Completed",
+    "duration": "00:29",
+    "risk": "Low",
+    "result": 91,
+    "linkedRequirement": "REQ-OPT-003"
+  }
+]

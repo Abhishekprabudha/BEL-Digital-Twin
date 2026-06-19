@@ -1,0 +1,29 @@
+{
+  "layers": [
+    "Data Ingestion & Pre-processing Layer",
+    "Knowledge Representation Layer",
+    "Simulation Orchestration Layer",
+    "Enterprise & Solver Integration Layer",
+    "Analytics & Decision Layer",
+    "Security, Audit & Access Control Layer",
+    "On-Prem HPC / GPU Compute Layer",
+    "Source Code & IP Handover Layer"
+  ],
+  "deploymentOptions": [
+    "Secure BEL on-premise deployment",
+    "Air-gapped deployment",
+    "Private cloud deployment",
+    "Hybrid deployment"
+  ],
+  "security": [
+    "Role-based access control",
+    "Audit logging",
+    "Source code handover",
+    "Dependency inventory",
+    "Unit tests",
+    "VAPT readiness",
+    "Data encryption placeholder",
+    "Offline operation",
+    "No mandatory external API dependency"
+  ]
+}

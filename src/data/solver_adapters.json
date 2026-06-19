@@ -1,0 +1,67 @@
+[
+  {
+    "name": "OpenFOAM",
+    "type": "CFD",
+    "status": "Adapter blueprint"
+  },
+  {
+    "name": "CalculiX",
+    "type": "Structural",
+    "status": "Adapter blueprint"
+  },
+  {
+    "name": "Elmer FEM",
+    "type": "Multiphysics",
+    "status": "Adapter blueprint"
+  },
+  {
+    "name": "ParaView",
+    "type": "Post-processing",
+    "status": "Visualization bridge"
+  },
+  {
+    "name": "Modelica",
+    "type": "Systems modelling",
+    "status": "Interface blueprint"
+  },
+  {
+    "name": "MATLAB / Simulink placeholder",
+    "type": "Model-based design",
+    "status": "Placeholder"
+  },
+  {
+    "name": "Python solvers",
+    "type": "Custom analytics",
+    "status": "Mock connector"
+  },
+  {
+    "name": "Custom C++ solver",
+    "type": "High-performance compute",
+    "status": "Mock connector"
+  },
+  {
+    "name": "GPU / HPC job queue",
+    "type": "On-prem compute",
+    "status": "Queue blueprint"
+  },
+  {
+    "name": "REST API connector",
+    "type": "Enterprise integration",
+    "status": "Mock service"
+  },
+  {
+    "name": "MQTT / telemetry stream connector",
+    "type": "Telemetry",
+    "status": "Mock stream"
+  },
+  {
+    "name": "PLM / ALM connector placeholder",
+    "type": "Digital thread",
+    "status": "Placeholder"
+  },
+  {
+    "name": "Test management connector placeholder",
+    "type": "IV&V",
+    "status": "Placeholder"
+  }
+]

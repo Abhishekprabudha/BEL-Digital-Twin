@@ -1,0 +1,122 @@
+[
+  {
+    "id": "SCN-DESERT",
+    "name": "Desert high-temperature mission",
+    "summary": "Synthetic hot-weather load case to test thermal margin and RF drift.",
+    "environment": {
+      "ambientTemp": 48,
+      "humidity": 16,
+      "vibration": 0.21,
+      "interferenceIndex": 28,
+      "atmosphericLoad": 31,
+      "duration": 6
+    },
+    "timeline": [
+      "Thermal ramp",
+      "Cooling stress",
+      "RF quality check",
+      "Readiness decision"
+    ],
+    "mitigations": [
+      "Reduce synthetic power duty cycle",
+      "Increase cooling profile",
+      "Schedule thermal inspection"
+    ]
+  },
+  {
+    "id": "SCN-MARITIME",
+    "name": "Maritime high-humidity mission",
+    "summary": "Synthetic humidity and corrosion-risk readiness profile.",
+    "environment": {
+      "ambientTemp": 34,
+      "humidity": 88,
+      "vibration": 0.18,
+      "interferenceIndex": 24,
+      "atmosphericLoad": 47,
+      "duration": 7
+    },
+    "timeline": [
+      "Humidity rise",
+      "EO clarity drop",
+      "PDU transient check",
+      "Readiness decision"
+    ],
+    "mitigations": [
+      "Run seal integrity inspection",
+      "Apply EO cleaning protocol",
+      "Monitor PDU load transients"
+    ]
+  },
+  {
+    "id": "SCN-MOUNTAIN",
+    "name": "Mountain low-temperature mission",
+    "summary": "Synthetic low-temperature and air-density variation scenario.",
+    "environment": {
+      "ambientTemp": -6,
+      "humidity": 42,
+      "vibration": 0.2,
+      "interferenceIndex": 21,
+      "atmosphericLoad": 37,
+      "duration": 5
+    },
+    "timeline": [
+      "Cold start",
+      "Optical stabilization",
+      "Structural check",
+      "Readiness decision"
+    ],
+    "mitigations": [
+      "Pre-heat electronics bay",
+      "Validate optical stabilization",
+      "Run cold-start embedded tests"
+    ]
+  },
+  {
+    "id": "SCN-VIBRATION",
+    "name": "High-vibration mobile platform mission",
+    "summary": "Synthetic mobile-platform vibration scenario for fatigue and alignment risk.",
+    "environment": {
+      "ambientTemp": 31,
+      "humidity": 36,
+      "vibration": 0.48,
+      "interferenceIndex": 23,
+      "atmosphericLoad": 24,
+      "duration": 8
+    },
+    "timeline": [
+      "Vibration burst",
+      "Structural fatigue estimate",
+      "EO drift check",
+      "Readiness decision"
+    ],
+    "mitigations": [
+      "Switch to vibration-damped envelope",
+      "Schedule mount inspection",
+      "Run alignment recalibration"
+    ]
+  },
+  {
+    "id": "SCN-DENSE-EM",
+    "name": "Dense electromagnetic environment mission",
+    "summary": "Synthetic non-actionable electromagnetic load case for RF/ESM resilience analysis.",
+    "environment": {
+      "ambientTemp": 37,
+      "humidity": 51,
+      "vibration": 0.24,
+      "interferenceIndex": 67,
+      "atmosphericLoad": 29,
+      "duration": 6
+    },
+    "timeline": [
+      "EM load rise",
+      "RF quality degradation",
+      "ESM confidence check",
+      "Readiness decision"
+    ],
+    "mitigations": [
+      "Activate synthetic filtering envelope",
+      "Reduce thermal load",
+      "Capture traceability evidence"
+    ]
+  }
+]

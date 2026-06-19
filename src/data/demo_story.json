@@ -1,0 +1,50 @@
+[
+  {
+    "step": 1,
+    "title": "Twin created",
+    "narration": "BEL starts with a digital twin of a complex defence electronics system.",
+    "value": "Source-owned digital engineering foundation"
+  },
+  {
+    "step": 2,
+    "title": "Telemetry active",
+    "narration": "Live synthetic telemetry streams into the twin.",
+    "value": "Operational state connected to engineering models"
+  },
+  {
+    "step": 3,
+    "title": "Scenario triggered",
+    "narration": "A mission scenario is triggered from the scenario engine.",
+    "value": "Safe time-dynamic what-if analysis"
+  },
+  {
+    "step": 4,
+    "title": "Multiphysics impact",
+    "narration": "Thermal, structural, RF and EO surrogate models calculate system impact.",
+    "value": "ROM-ready platform extensible to high-fidelity solvers"
+  },
+  {
+    "step": 5,
+    "title": "Predict before failure",
+    "narration": "The platform predicts risk before physical failure.",
+    "value": "Predictive operations and maintenance"
+  },
+  {
+    "step": 6,
+    "title": "What-if mitigation",
+    "narration": "Operator runs what-if mitigation and operating envelope changes.",
+    "value": "Decision support without exposing classified tactics"
+  },
+  {
+    "step": 7,
+    "title": "Evidence captured",
+    "narration": "The digital thread captures evidence and feeds design improvement.",
+    "value": "IV&V-ready traceability"
+  },
+  {
+    "step": 8,
+    "title": "BEL autonomy",
+    "narration": "BEL retains source ownership, auditability and on-prem autonomy.",
+    "value": "Long-term sovereign digital engineering infrastructure"
+  }
+]

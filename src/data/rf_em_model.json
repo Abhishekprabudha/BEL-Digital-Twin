@@ -1,0 +1,12 @@
+{
+  "id": "HF-EM-001",
+  "domain": "Electromagnetics",
+  "inputs": [
+    "thermalLoad",
+    "componentAge",
+    "syntheticInterferenceIndex"
+  ],
+  "formula": "rfQuality = base - thermalPenalty - ageingPenalty - interferencePenalty",
+  "validation": "POC surrogate model only",
+  "visual": "rf-lobe-schematic"
+}

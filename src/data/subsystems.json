@@ -1,0 +1,223 @@
+[
+  {
+    "id": "RAD-01",
+    "name": "AESA Radar Module",
+    "type": "High-Frequency Electromagnetics",
+    "health": 91,
+    "temperature": 54,
+    "vibration": 0.18,
+    "signalQuality": 93,
+    "failureProbability": 4.8,
+    "rul": 820,
+    "models": [
+      "HF-EM-001",
+      "THERM-001"
+    ],
+    "requirements": [
+      "REQ-RF-001",
+      "REQ-TRACE-004"
+    ],
+    "tests": [
+      "TC-RF-011",
+      "TC-THERM-021"
+    ],
+    "recommendation": "Monitor thermal drift during high-power synthetic profile."
+  },
+  {
+    "id": "ESM-02",
+    "name": "Electronic Support Measures Module",
+    "type": "Low-Frequency Electromagnetics",
+    "health": 89,
+    "temperature": 49,
+    "vibration": 0.14,
+    "signalQuality": 88,
+    "failureProbability": 6.1,
+    "rul": 740,
+    "models": [
+      "LF-EM-002",
+      "SYS-ENG-004"
+    ],
+    "requirements": [
+      "REQ-LF-002"
+    ],
+    "tests": [
+      "TC-LF-008"
+    ],
+    "recommendation": "Run calibration check after dense synthetic environment scenario."
+  },
+  {
+    "id": "EO-03",
+    "name": "Electro-Optical Sensor Module",
+    "type": "Optics / Photonics",
+    "health": 94,
+    "temperature": 43,
+    "vibration": 0.12,
+    "signalQuality": 96,
+    "failureProbability": 3.4,
+    "rul": 910,
+    "models": [
+      "OPT-003",
+      "STRUCT-002"
+    ],
+    "requirements": [
+      "REQ-OPT-003"
+    ],
+    "tests": [
+      "TC-OPT-014"
+    ],
+    "recommendation": "Maintain alignment inspection at next synthetic maintenance window."
+  },
+  {
+    "id": "RFP-04",
+    "name": "RF Power Amplifier Module",
+    "type": "Electronics Reliability",
+    "health": 82,
+    "temperature": 67,
+    "vibration": 0.22,
+    "signalQuality": 84,
+    "failureProbability": 14.2,
+    "rul": 420,
+    "models": [
+      "REL-004",
+      "THERM-001"
+    ],
+    "requirements": [
+      "REQ-REL-006"
+    ],
+    "tests": [
+      "TC-REL-019"
+    ],
+    "recommendation": "Inspect within 42 synthetic operating hours under reduced envelope."
+  },
+  {
+    "id": "CLG-05",
+    "name": "Cooling and Thermal Control Unit",
+    "type": "CFD / Cooling Airflow",
+    "health": 86,
+    "temperature": 57,
+    "vibration": 0.26,
+    "signalQuality": 87,
+    "failureProbability": 10.1,
+    "rul": 560,
+    "models": [
+      "CFD-005",
+      "THERM-001"
+    ],
+    "requirements": [
+      "REQ-CFD-004"
+    ],
+    "tests": [
+      "TC-CFD-002"
+    ],
+    "recommendation": "Check fan anomaly trend and airflow efficiency."
+  },
+  {
+    "id": "STR-06",
+    "name": "Structural Mount and Vibration Assembly",
+    "type": "Structural Mechanics",
+    "health": 90,
+    "temperature": 38,
+    "vibration": 0.36,
+    "signalQuality": 89,
+    "failureProbability": 7.5,
+    "rul": 690,
+    "models": [
+      "STRUCT-002"
+    ],
+    "requirements": [
+      "REQ-STR-005"
+    ],
+    "tests": [
+      "TC-STR-023"
+    ],
+    "recommendation": "Run fatigue simulation for high-vibration profile."
+  },
+  {
+    "id": "ECC-07",
+    "name": "Embedded Control Computer",
+    "type": "Embedded Control Logic",
+    "health": 93,
+    "temperature": 46,
+    "vibration": 0.11,
+    "signalQuality": 95,
+    "failureProbability": 4.0,
+    "rul": 880,
+    "models": [
+      "EMB-006",
+      "FS-007"
+    ],
+    "requirements": [
+      "REQ-EMB-007",
+      "REQ-FS-008"
+    ],
+    "tests": [
+      "TC-EMB-006",
+      "TC-FS-009"
+    ],
+    "recommendation": "Model-based code assertions nominal."
+  },
+  {
+    "id": "PDU-08",
+    "name": "Power Distribution Unit",
+    "type": "Electronics Reliability",
+    "health": 87,
+    "temperature": 52,
+    "vibration": 0.15,
+    "signalQuality": 90,
+    "failureProbability": 8.4,
+    "rul": 610,
+    "models": [
+      "REL-004"
+    ],
+    "requirements": [
+      "REQ-PWR-009"
+    ],
+    "tests": [
+      "TC-PWR-004"
+    ],
+    "recommendation": "Monitor load transients during scenario run."
+  },
+  {
+    "id": "MSP-09",
+    "name": "Mission Scenario Processor",
+    "type": "Systems Engineering",
+    "health": 92,
+    "temperature": 44,
+    "vibration": 0.13,
+    "signalQuality": 92,
+    "failureProbability": 3.9,
+    "rul": 850,
+    "models": [
+      "SYS-ENG-004",
+      "EMB-006"
+    ],
+    "requirements": [
+      "REQ-SYS-010"
+    ],
+    "tests": [
+      "TC-SYS-012"
+    ],
+    "recommendation": "Scenario event engine healthy."
+  },
+  {
+    "id": "HMU-10",
+    "name": "Health Monitoring Unit",
+    "type": "Predictive Operations",
+    "health": 95,
+    "temperature": 41,
+    "vibration": 0.09,
+    "signalQuality": 97,
+    "failureProbability": 2.4,
+    "rul": 960,
+    "models": [
+      "ANOM-008"
+    ],
+    "requirements": [
+      "REQ-HMU-011"
+    ],
+    "tests": [
+      "TC-HMU-013"
+    ],
+    "recommendation": "Continue telemetry fusion and audit logging."
+  }
+]

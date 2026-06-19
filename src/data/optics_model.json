@@ -1,0 +1,12 @@
+{
+  "id": "OPT-003",
+  "domain": "Optics / Photonics",
+  "inputs": [
+    "vibration",
+    "thermalDrift",
+    "atmosphericLoad"
+  ],
+  "formula": "eoClarity = base - jitterPenalty - thermalDriftPenalty - atmospherePenalty",
+  "validation": "POC surrogate model only",
+  "visual": "optics-clarity-map"
+}

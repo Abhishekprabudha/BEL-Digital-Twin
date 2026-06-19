@@ -1,0 +1,13 @@
+{
+  "id": "CFD-005",
+  "domain": "CFD / Cooling Airflow",
+  "inputs": [
+    "fanRPM",
+    "ductLoss",
+    "ambientTemp",
+    "powerLoad"
+  ],
+  "formula": "coolingReserve = airflowEfficiency - thermalDemand",
+  "validation": "POC surrogate model only",
+  "visual": "airflow-vector-field"
+}
